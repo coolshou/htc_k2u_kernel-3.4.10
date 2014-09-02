@@ -8,16 +8,16 @@ defconfig file: k2_u_defconfig  (arm-eabi-4.6)
 Download:
 =========
 If you are not already using an AOSP toolchain (included in an AOSP build tree), download the corresponding official android toolchain for the arm-eabi specified above for this device:
-        
+```        
 git clone https://android.googlesource.com/platform/prebuilt  for 4.4.3
 git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6  for 4.6 
 (use darwin-x86 in place of linux-x86 for mac)
-
+```
 Build the kernel:
 =================
 set the following environment variables:
-
-export TOP= [where you installed the toolchain or top of android AOSP code base]
+````
+export TOP= [where you installed the toolchain or top of android AOSP code base] 
 export PATH=$TOP/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin:$PATH (use corresponding arm-eabi bin path)
 export ARCH=arm
 export SUBARCH=arm
@@ -26,6 +26,7 @@ export CROSS_COMPILE=arm-eabi-
 make [the defconfig file for this device above]
 make clean  (for subsequent builds)
 make -j4    (in this example 4 is the number of processors of your build machine)
+````
 
 Output Binary Files:
 ====================
