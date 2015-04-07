@@ -72,17 +72,14 @@ $(KERNEL_OUT)/piggy : $(TARGET_PREBUILT_INT_KERNEL)
 $(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(KERNEL_HEADERS_INSTALL)
 	$(MAKE) -C kernel O=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi-
 	$(MAKE) -C kernel O=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi- modules
-	$(info KERNEL_MODULES_INSTALL=$(KERNEL_MODULES_INSTALL))
-	$(info KERNEL_MODULES_OUT=$(KERNEL_MODULES_OUT))
 	$(MAKE) -C kernel O=$(KERNEL_OUT) INSTALL_MOD_PATH=../../$(KERNEL_MODULES_INSTALL) INSTALL_MOD_STRIP=1 ARCH=arm CROSS_COMPILE=arm-eabi- modules_install
-	#all folder's .ko move to /lib/modules/
 	$(mv-modules)
 	$(clean-module-folder)
 	$(append-dtb)
 
 $(KERNEL_HEADERS_INSTALL): $(KERNEL_OUT) $(KERNEL_CONFIG)
 	$(MAKE) -C kernel O=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi- headers_install
-
+	
 kerneltags: $(KERNEL_OUT) $(KERNEL_CONFIG)
 	$(MAKE) -C kernel O=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE=arm-eabi- tags
 
